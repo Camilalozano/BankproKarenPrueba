@@ -168,20 +168,23 @@ de "Extracción completa" — no vuelve a consultar FundsForNGOs.
 
 Qué calcula por cada convocatoria:
 
-- **C1 (Alineación Temática, 25%)**: cruza "Areas tematicas" contra el
+- **C1 (Alineación Temática, 50%)**: cruza "Areas tematicas" contra el
   catálogo `ISSUES_DISPONIBLES`; si no hay coincidencia, hace un respaldo
   por palabras clave en título/descripción.
-- **C2 (Tiempo Disponible, 25%)**: `Plazo_Semanas = (fecha_cierre - HOY) / 7`,
+- **C2 (Tiempo Disponible, 0%)**: `Plazo_Semanas = (fecha_cierre - HOY) / 7`,
   calculado dinámicamente contra la fecha del sistema en cada corrida.
-- **C3 (Accesibilidad Geográfica, 15%)**: revisa si "Paises elegibles"
+- **C3 (Accesibilidad Geográfica, 0%)**: revisa si "Paises elegibles"
   incluye a Colombia (ID 48) o alguna región/cobertura amplia; si es una
   lista concreta de países sin Colombia, activa la bandera roja
   **"Geografía restrictiva para Colombia"**.
-- **C4 (Viabilidad Financiera, 10%)**: mapea "Monto" contra
+- **C4 (Viabilidad Financiera, 50%)**: mapea "Monto" contra
   `TAMANOS_GRANT_DISPONIBLES` (IDs 0-5).
 
-`Puntuacion_Final = [(C1×0.25) + (C2×0.25) + (C3×0.15) + (C4×0.10)] / 0.75`,
+`Puntuacion_Final = (C1×0.50) + (C2×0.00) + (C3×0.00) + (C4×0.50)`,
 categorizada ALTA (≥7.50) / MEDIA (6.50-7.49) / BAJA (<6.50).
+
+C2 y C3 se siguen calculando para informar plazos, elegibilidad y alertas,
+pero no aportan puntos a la puntuación final. Los pesos suman 100%.
 
 **Regla de exclusión geográfica (obligatoria):** si se activa la bandera
 "Geografía restrictiva para Colombia", la convocatoria **nunca** puede
