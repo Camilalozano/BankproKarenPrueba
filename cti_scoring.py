@@ -51,7 +51,7 @@ import pandas as pd
 from ffn_client import ISSUES_DISPONIBLES, TAMANOS_GRANT_DISPONIBLES
 
 # =============================================================================
-# CRITERIO 1: Alineación Temática (peso 0.25)
+# CRITERIO 1: Alineación Temática (peso 0.50)
 # =============================================================================
 
 # IDs de ISSUES_DISPONIBLES agrupados según la Sección 1.1 / Criterio 1 del
@@ -129,7 +129,7 @@ def calcular_c1(areas_tematicas: str, titulo: str, descripcion_corta: str, descr
 
 
 # =============================================================================
-# CRITERIO 2: Tiempo Disponible (peso 0.25)
+# CRITERIO 2: Tiempo Disponible (peso 0.00)
 # =============================================================================
 
 _SCORE_C2_SIN_FECHA = 5.0  # punto medio de la banda 4.0-6.0 (v5.3)
@@ -168,7 +168,7 @@ def calcular_c2(fecha_limite_ddmmyyyy: str, hoy: date | None = None) -> tuple[fl
 
 
 # =============================================================================
-# CRITERIO 3: Accesibilidad Geográfica (peso 0.15)
+# CRITERIO 3: Accesibilidad Geográfica (peso 0.00)
 # =============================================================================
 
 COLOMBIA_ID = 48
@@ -215,7 +215,7 @@ def calcular_c3(paises_elegibles: str) -> dict:
 
 
 # =============================================================================
-# CRITERIO 4: Viabilidad Financiera (peso 0.10)
+# CRITERIO 4: Viabilidad Financiera (peso 0.50)
 # =============================================================================
 
 _NOMBRE_A_ID_MONTO = {t["name"].strip().lower(): t["id"] for t in TAMANOS_GRANT_DISPONIBLES}
@@ -267,9 +267,9 @@ def evaluar_convocatoria(fila: dict, hoy: date | None = None) -> dict:
     c3 = calcular_c3(fila.get("Paises elegibles", ""))
     c4_score, monto_id, flag_monto_no_std = calcular_c4(fila.get("Monto", ""))
 
-    puntuacion_final = round(
-        ((c1 * 0.25) + (c2_score * 0.25) + (c3["score"] * 0.15) + (c4_score * 0.10)) / 0.75, 2
-    )
+    # C2 y C3 se conservan como información y alertas, con peso cero.
+    # Los pesos de C1 y C4 suman 1.00; no requieren normalización adicional.
+    puntuacion_final = round((c1 * 0.50) + (c4_score * 0.50), 2)
 
     if puntuacion_final >= 7.50:
         categoria = "ALTA"
