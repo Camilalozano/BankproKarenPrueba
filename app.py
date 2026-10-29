@@ -413,7 +413,7 @@ df_cti = evaluar_cti(df) if hay_datos else None
 
 st.divider()
 tab_extraccion, tab_cti, tab_prioridad = st.tabs(
-    ["📋 Extracción completa", "🔬 Evaluación y Priorización CTI", "🏆 Oportunidades de Máxima Prioridad"]
+    ["📋 Extracción completa", "🔬 Evaluación y Priorización", "🏆 Oportunidades de Máxima Prioridad"]
 )
 
 with tab_extraccion:
