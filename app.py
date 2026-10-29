@@ -129,7 +129,7 @@ def mostrar_encabezado(titulo: str) -> None:
 
 
 st.set_page_config(
-    page_title="Buscador de Convocatorias — Agencia Atenea",
+    page_title="Buscador de Convocatorias — Bankpro",
     page_icon=RUTA_LOGO if os.path.exists(RUTA_LOGO) else "🔎",
     layout="wide",
 )
@@ -187,7 +187,7 @@ def obtener_cliente() -> FFNClient:
     return cliente
 
 
-mostrar_encabezado("Buscador de Convocatorias — FundsForNGOs")
+mostrar_encabezado("Buscador de Convocatorias — Bankpro")
 
 with st.status("Conectando con FundsForNGOs...", expanded=False) as status_login:
     try:
