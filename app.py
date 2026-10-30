@@ -287,7 +287,7 @@ palabra_clave = st.sidebar.text_input("Palabra clave", placeholder="Ej: agua, mu
 limite_resultados = st.sidebar.number_input(
     "Límite de resultados a extraer (0 = sin límite)",
     min_value=0,
-    value=50,
+    value=100,
     step=10,
     help="Un número alto puede tardar varios minutos, porque se consulta el detalle de cada convocatoria una por una.",
 )
