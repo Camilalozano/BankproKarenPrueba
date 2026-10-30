@@ -358,7 +358,29 @@ st.caption(
     "según cuántos resultados haya."
 )
 
-if st.button("▶️ Ejecutar extracción y preparar Excel", type="primary"):
+st.markdown(
+    """
+    <style>
+    .st-key-ejecutar_excel button {
+        background-color: #065094;
+        border-color: #065094;
+        color: #FFFFFF;
+    }
+    .st-key-ejecutar_excel button:hover {
+        background-color: #043D73;
+        border-color: #043D73;
+        color: #FFFFFF;
+    }
+    .st-key-ejecutar_excel button:focus-visible {
+        outline: 3px solid #5263AB;
+        outline-offset: 2px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+if st.button("▶️ Ejecutar extracción y preparar Excel", type="primary", key="ejecutar_excel"):
     filtros = dict(st.session_state.get("filtros_actuales") or armar_filtros())
     filtros["includeExpired"] = False
     limite = None if limite_resultados == 0 else int(limite_resultados)
