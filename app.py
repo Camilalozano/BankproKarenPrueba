@@ -283,7 +283,6 @@ with st.sidebar.expander("Filtros avanzados"):
     tipos_sel = st.multiselect("Tipo de convocatoria", list(opciones_tipos.keys()))
 
 palabra_clave = st.sidebar.text_input("Palabra clave", placeholder="Ej: agua, mujeres, clima")
-incluir_vencidas = st.sidebar.checkbox("Incluir convocatorias vencidas", value=False)
 
 limite_resultados = st.sidebar.number_input(
     "Límite de resultados a extraer (0 = sin límite)",
@@ -307,7 +306,7 @@ def armar_filtros() -> dict:
         "deadlineActivo": activar_deadline,
         "deadlineDesde": deadline_desde,
         "deadlineHasta": deadline_hasta,
-        "includeExpired": incluir_vencidas,
+        "includeExpired": False,
     }
 
 
@@ -360,7 +359,8 @@ st.caption(
 )
 
 if st.button("▶️ Ejecutar extracción y preparar Excel", type="primary"):
-    filtros = st.session_state.get("filtros_actuales") or armar_filtros()
+    filtros = dict(st.session_state.get("filtros_actuales") or armar_filtros())
+    filtros["includeExpired"] = False
     limite = None if limite_resultados == 0 else int(limite_resultados)
 
     with st.status("Extrayendo convocatorias...", expanded=True) as status_extraccion:
