@@ -129,7 +129,7 @@ def mostrar_encabezado(titulo: str) -> None:
 
 
 st.set_page_config(
-    page_title="Buscador de Convocatorias — Bankpro",
+    page_title="Prueba cambio de nombre",
     page_icon=RUTA_LOGO if os.path.exists(RUTA_LOGO) else "🔎",
     layout="wide",
 )
@@ -143,7 +143,7 @@ def pedir_contrasena() -> bool:
     if st.session_state.get("autenticado"):
         return True
 
-    mostrar_encabezado("Buscador de Convocatorias")
+    mostrar_encabezado("Prueba cambio de nombre")
     st.write("Ingresa la contraseña de acceso para continuar.")
 
     with st.form("form_login_app"):
@@ -187,7 +187,7 @@ def obtener_cliente() -> FFNClient:
     return cliente
 
 
-mostrar_encabezado("Buscador de Convocatorias — Bankpro")
+mostrar_encabezado("Prueba cambio de nombre")
 
 with st.status("Conectando con FundsForNGOs...", expanded=False) as status_login:
     try:
